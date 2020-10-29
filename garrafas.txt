@@ -1,0 +1,31 @@
+Possiveis operações
+ - encher G4L
+ - encher G3L
+ - esvaziar G4L
+ - esvaziar G3L
+ - transferir G4L para G3L
+ - transferir G3L para G4L
+ 
+
+- add estado inicial 0,0 na fila de estados a serem visitados
+
+- REPETE AS AÇÕES ABAIXO ATÉ QUE TODOS ELEMENTOS DA FILA SEJAM ELIMINADOS
+    - verifica na lista de estados visitados se o estado 0,0 já foi visitado
+        SE NÃO
+            - verificar as possíveis operações com 0,0
+                - posso encher G4l && estado 4,0 não foi visitado?
+                    - Sim, add estado 4,0 na fila de estados a serem visitados
+                - posso encher G3L && estado 3,0 não foi visitado??
+                    - Sim, add estado 0,3 na fila de estados a serem visitados
+                - posso esvaziar G4L
+                    - Não, garrafa vazia
+                - posso esvaziar G3L
+                    - Não, garrafa vazia
+                - posso transferir G4L para G3L
+                    - Não, garrafa vazia
+                - posso transferir G3L para G4L
+                    - Não, garrafa vazia
+                - add o estado 0,0 na lista dos estados visitados
+        SE SIM
+            - verifica o próximo estado da fila de estados a serem visitados
+
