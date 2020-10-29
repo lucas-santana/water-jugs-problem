@@ -8,17 +8,17 @@ void inserirSemDuplicar(Fila *estadosParaVisitar, int G4L, int G3L) {
 
 }
 
-int encherG4L(Celula estado) {
-
+int encherG4L(Celula estado, Fila *estadosParaVisitar) {
     //só posso encher se não tiver cheia
     if (estado.G4L == 4) {
         return 0;
     }
+
+    inserirSemDuplicar(estadosParaVisitar, 4, estado.G3L);
     return 1;
 }
 
 int encherG3L(Celula estado, Fila *estadosParaVisitar) {
-
     //só posso encher se não tiver cheia
     if (estado.G3L == 3) {
         return 0;
@@ -28,41 +28,66 @@ int encherG3L(Celula estado, Fila *estadosParaVisitar) {
     return 1;
 }
 
-int esvaziarG4L(Celula estado) {
+int esvaziarG4L(Celula estado, Fila *estadosParaVisitar) {
 
     //só posso esvaziar se a qtde existente for maior do que 0
     if (estado.G4L == 0) {
         return 0;
     }
+
+    inserirSemDuplicar(estadosParaVisitar, 0, estado.G3L);
     return 1;
 }
 
-int esvaziarG3L(Celula estado) {
+int esvaziarG3L(Celula estado, Fila *estadosParaVisitar) {
 
     //só posso esvaziar se a qtde existente for maior do que 0
     if (estado.G3L == 0) {
         return 0;
     }
+
+    inserirSemDuplicar(estadosParaVisitar, estado.G4L, 0);
     return 1;
 }
 
-int transferirG3LParaG4L(Celula estado) {
+int transferirG3LParaG4L(Celula estado, Fila *estadosParaVisitar) {
 
     //só posso transferir da G3L para a garrafa de G4L se G3L não estiver vazia ou a G4L não estiver totamente cheia
     if (estado.G3L == 0 || estado.G4L == 4) {
         return 0;
     }
 
+    int g4lnova = estado.G4L + estado.G3L;
+
+    if (g4lnova > 4) {
+        int g3lnova = g4lnova - 4;
+        inserirSemDuplicar(estadosParaVisitar, 4, g3lnova);
+    }
+
+    if (g4lnova <= 4) {
+        inserirSemDuplicar(estadosParaVisitar, g4lnova, 0);
+    }
+
     return 1;
 }
 
-int transferirG4LParaG3L(Celula estado) {
+int transferirG4LParaG3L(Celula estado, Fila *estadosParaVisitar) {
 
     //só posso transferir da G4L para a garrafa de G3L se G4L não estiver vazia ou a G3L não estiver totamente cheia
     if (estado.G4L == 0 || estado.G3L == 3) {
         return 0;
     }
 
+    int g3lnova = estado.G4L + estado.G3L;
+
+    if (g3lnova > 3) {
+        int g4lnova = g3lnova - 3;
+        inserirSemDuplicar(estadosParaVisitar, g4lnova, 3);
+    }
+
+    if (g3lnova <= 3) {
+        inserirSemDuplicar(estadosParaVisitar, g3lnova, 0);
+    }
     return 1;
 }
 
@@ -104,49 +129,11 @@ void main() {
          */
 
         encherG3L(estado, estadosParaVisitar);
-
-        if (encherG4L(estado)) {
-            inserirSemDuplicar(estadosParaVisitar, 4, estado.G3L);
-        }
-
-        if (esvaziarG3L(estado)) {
-            inserirSemDuplicar(estadosParaVisitar, estado.G4L, 0);
-        }
-
-        if (esvaziarG4L(estado)) {
-            inserirSemDuplicar(estadosParaVisitar, 0, estado.G3L);
-        }
-
-        if (transferirG3LParaG4L(estado)) {
-
-            int g4lnova = estado.G4L + estado.G3L;
-
-            if (g4lnova > 4) {
-                int g3lnova = g4lnova - 4;
-                inserirSemDuplicar(estadosParaVisitar, 4, g3lnova);
-            }
-
-            if (g4lnova <= 4) {
-
-                inserirSemDuplicar(estadosParaVisitar, g4lnova, 0);
-            }
-
-        }
-
-        if (transferirG4LParaG3L(estado)) {
-
-            int g3lnova = estado.G4L + estado.G3L;
-
-            if (g3lnova > 3) {
-                int g4lnova = g3lnova - 3;
-                inserirSemDuplicar(estadosParaVisitar, g4lnova, 3);
-            }
-
-            if (g3lnova <= 3) {
-                inserirSemDuplicar(estadosParaVisitar, g3lnova, 0);
-            }
-        }
-
+        encherG4L(estado, estadosParaVisitar);
+        esvaziarG3L(estado, estadosParaVisitar);
+        esvaziarG4L(estado, estadosParaVisitar);
+        transferirG3LParaG4L(estado, estadosParaVisitar);
+        transferirG4LParaG3L(estado, estadosParaVisitar);
 
     }
     printf("Numero de elementos antes: %d\n", count(estadosParaVisitar));
