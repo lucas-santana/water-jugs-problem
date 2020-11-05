@@ -5,6 +5,7 @@ struct celula {
     int G4L;
     int G3L;
     char operacao[30];
+    int elementoFinal;
     struct celula *prox;
 };
 typedef struct celula Celula;
@@ -52,8 +53,14 @@ int count(Fila *f) {
 
     return count;
 }
-
-int search(Fila *f, int G4L, int G3L) {
+/**
+ * Pesquisa na fila se um dado estado já existe
+ * @param f
+ * @param G4L
+ * @param G3L
+ * @return
+ */
+int pesquisarEstadoFila(Fila *f, int G4L, int G3L) {
     Celula *q;
     for (q = f->ini; q != NULL; q = q->prox) {
         if (q->G4L == G4L && q->G3L == G3L)
@@ -83,12 +90,14 @@ int retira(Fila *f) {
     int v;
     if (vazia(f)) {
         printf("Fila vazia.\n");
-        exit(1);
+        return 0;
     }
 
     f->ini = desenfileira(f->ini);
-    if (f->ini == NULL)
+    if (f->ini == NULL){
         f->fim = NULL;
+    }
+
     return 1;
 }
 

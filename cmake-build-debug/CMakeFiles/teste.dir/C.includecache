@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/lucas/Documentos/water-jugs-problem/fila_estado.h
+/home/lucas/Documentos/water-jugs-problem/fila_estado.c
 stdio.h
 -
 stdlib.h
@@ -15,6 +15,12 @@ stdlib.h
 /home/lucas/Documentos/water-jugs-problem/garrafas.c
 stdio.h
 -
-fila_estado.h
-/home/lucas/Documentos/water-jugs-problem/fila_estado.h
+fila_estado.c
+/home/lucas/Documentos/water-jugs-problem/fila_estado.c
+lista_estado.c
+/home/lucas/Documentos/water-jugs-problem/lista_estado.c
+
+/home/lucas/Documentos/water-jugs-problem/lista_estado.c
+stdio.h
+-
 

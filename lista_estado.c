@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 struct estado
 {
     int G4L;
@@ -18,24 +17,29 @@ Estado *inicializaEstadoLista(void)
     return novoEstado;
 }
 
-Estado *insereEstadoLista(Estado *estadoAtual, int G4L, int G3L)
+Estado *insereEstadoLista(Estado *estadosVisitados, int G4L, int G3L)
 {
     Estado *novoEstado = (Estado *) malloc(sizeof(Estado));
     novoEstado->G4L = G4L;
     novoEstado->G3L = G3L;
-    novoEstado->pai = estadoAtual;
+    novoEstado->pai = estadosVisitados;
     return novoEstado;
 }
 
 /* função busca: busca um elemento na lista */
 Estado *pesquisarEstado(Estado *estado, int G4L, int G3L)
 {
+    if(estado == NULL){
+        return NULL;
+    }
+
     Estado *p;
-    for (p = estado; p->pai != NULL; p = p->pai)
-        if (p->G3L == G3L && p->G4L == G4L)
+    for (p = estado; p != NULL; p = p->pai){
+        if (p->G3L == G3L && p->G4L == G4L){
             return p;
+        }
+    }
     return NULL;
-    /* não achou o elemento */
 }
 
 /*void encherG4L(Estado *estado)

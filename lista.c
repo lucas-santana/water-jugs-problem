@@ -13,7 +13,7 @@ Lista *inicializa(void)
 }
 
 /* inserção no início: retorna a lista atualizada */
-Lista *insere(Lista *l, int i)
+Lista *insereLista(Lista *l, int i)
 {
     Lista *novo = (Lista *) malloc(sizeof(Lista));
     novo->info = i;
@@ -31,7 +31,7 @@ void imprime(Lista *l)
 }
 
 /* função vazia: retorna 1 se vazia ou 0 se não vazia */
-int vazia(Lista *l)
+int vaziaLista(Lista *l)
 {
     return (l == NULL);
 }
@@ -48,7 +48,7 @@ Lista *busca(Lista *l, int v)
 }
 
 /* função retira: retira elemento da lista */
-Lista *retira(Lista *l, int v)
+Lista *retiraLista(Lista *l, int v)
 {
     Lista *ant = NULL; /* ponteiro para elemento anterior */
     Lista *p = l;      /*ponteiro para percorrer a lista */
